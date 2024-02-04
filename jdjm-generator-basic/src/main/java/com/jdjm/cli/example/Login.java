@@ -5,6 +5,9 @@ import picocli.CommandLine.Option;
 
 import java.util.concurrent.Callable;
 
+/**
+ * 交互式命令
+ */
 public class Login implements Callable<Integer> {
     @Option(names = {"-u", "--user"}, description = "User name")
     String user;

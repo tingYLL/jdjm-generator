@@ -2,6 +2,9 @@ package com.jdjm.model;
 
 import lombok.Data;
 
+/**
+ * @author jdjm
+ */
 @Data
 public class MainTemplateConfig {
     /**
