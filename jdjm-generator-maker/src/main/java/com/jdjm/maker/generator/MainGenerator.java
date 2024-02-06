@@ -32,9 +32,6 @@ public class MainGenerator {
 //        src/main/resources/templates
         String inputResourcePath = projectPath + File.separator + "src/main/resources";
 
-
-
-
         //从元信息中读取 Java包的基础路径
         //com.jdjm
         String outputBasePackage = meta.getBasePackage();
@@ -45,6 +42,23 @@ public class MainGenerator {
 
         String inputFilePath = inputResourcePath + File.separator + "templates/java/model/DataModel.java.ftl";
         String outputFilePath = outputBaseJavaPackagePath + "/model/DataModel.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+
+        //ConfigCommand
+        inputFilePath = inputResourcePath + File.separator +  "templates/java/cli/command/ConfigCommand.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/cli/command/ConfigCommand.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+        //GenerateCommand
+        inputFilePath = inputResourcePath + File.separator  + "templates/java/cli/command/GenerateCommand.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/cli/command/GenerateCommand.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+        //ListCommand
+        inputFilePath = inputResourcePath + File.separator  + "templates/java/cli/command/ListCommand.java.ftl";
+        outputFilePath =  outputBaseJavaPackagePath + "/cli/command/ListCommand.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+        //CommandExecutor
+        inputFilePath = inputResourcePath + File.separator + "templates/java/cli/CommandExecutor.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/cli/CommandExecutor.java";
         DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
     }
 }

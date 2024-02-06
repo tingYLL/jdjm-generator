@@ -1,8 +1,8 @@
-package com.jdjm.maker.cli.command;
+package ${basePackage}.cli.command;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.jdjm.maker.generator.file.FileGenerator;
-import com.jdjm.maker.model.DataModel;
+import ${basePackage}.generator.file.FileGenerator;
+import ${basePackage}.model.DataModel;
 import lombok.Data;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -12,14 +12,11 @@ import java.util.concurrent.Callable;
 @Command(name = "generate", description = "生成代码", mixinStandardHelpOptions = true)
 @Data
 public class GenerateCommand implements Callable<Integer> {
-    @Option(names = {"-l", "--loop"}, arity = "0..1", description = "是否循环", interactive = true, echo = true)
-    private boolean loop;
 
-    @Option(names = {"-a", "--author"}, arity = "0..1", description = "作者", interactive = true, echo = true)
-    private String author = "jdjm";
-
-    @Option(names = {"-o", "--outputText"}, arity = "0..1", description = "输出文本", interactive = true, echo = true)
-    private String outputText = "sum = ";
+    <#list modelConfig.models as modelInfo>
+        @Option(names = {<#if modelInfo.abbr??>"-${modelInfo.abbr}"</#if>,<#if modelInfo.fieldName??>"--${modelInfo.fieldName}"</#if>}, arity = "0..1", description = "${modelInfo.description}", interactive = true, echo = true)
+        private  ${modelInfo.type} ${modelInfo.fieldName} <#if modelInfo.defaultValue??> = ${modelInfo.defaultValue?c}</#if>;
+    </#list>
 
     public Integer call() throws Exception {
         DataModel dataModel = new DataModel();
