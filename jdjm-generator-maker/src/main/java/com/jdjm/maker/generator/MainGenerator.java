@@ -40,10 +40,12 @@ public class MainGenerator {
         //generated/src/main/java/com/jdjm
         String outputBaseJavaPackagePath = outputPath + File.separator +"src/main/java/" + outputBasePackagePath;
 
+        //生成数据模型DataModel文件
         String inputFilePath = inputResourcePath + File.separator + "templates/java/model/DataModel.java.ftl";
         String outputFilePath = outputBaseJavaPackagePath + "/model/DataModel.java";
         DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
 
+        //生成Command命令文件
         //ConfigCommand
         inputFilePath = inputResourcePath + File.separator +  "templates/java/cli/command/ConfigCommand.java.ftl";
         outputFilePath = outputBaseJavaPackagePath + "/cli/command/ConfigCommand.java";
@@ -59,6 +61,20 @@ public class MainGenerator {
         //CommandExecutor
         inputFilePath = inputResourcePath + File.separator + "templates/java/cli/CommandExecutor.java.ftl";
         outputFilePath = outputBaseJavaPackagePath + "/cli/CommandExecutor.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+
+        //生成generate文件
+        //MainGenerator
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/MainGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/MainGenerator.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+        //DynamicFileGenerator
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/DynamicFileGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/DynamicFileGenerator.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+        //StaticFileGenerator
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/StaticFileGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/StaticFileGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
     }
 }
