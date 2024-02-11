@@ -14,17 +14,22 @@ import java.io.IOException;
 import java.net.URL;
 
 public class MainGenerator {
-    public static void main(String[] args) throws TemplateException, IOException {
+    public static void main(String[] args) throws TemplateException, IOException, InterruptedException {
         Meta meta = MetaManager.getMetaObject();
         System.out.println(meta);
 
         //根路径位置
         String projectPath = System.getProperty("user.dir");
         System.out.println("user.dir:"+projectPath);
-        String outputPath = projectPath + File.separator + "generated";
+        String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
         if(!FileUtil.exist(outputPath)){
             FileUtil.mkdir(outputPath);
         }
+        //从原始模版文件路径复制到生成的代码包中
+        String sourceRootPath = meta.getFileConfig().getSourceRootPath();
+        String sourceCopyDestPath = outputPath + File.separator + ".source";
+        FileUtil.copy(sourceRootPath,sourceCopyDestPath,false);
+
 
         // 读取resources 目录
 //        ClassPathResource classPathResource = new ClassPathResource("");
@@ -76,5 +81,19 @@ public class MainGenerator {
         inputFilePath = inputResourcePath + File.separator + "templates/java/generator/StaticFileGenerator.java.ftl";
         outputFilePath = outputBaseJavaPackagePath + "/generator/StaticFileGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+
+        //生成pom.xml
+        inputFilePath = inputResourcePath +File.separator + "templates/pom.xml.ftl";
+        outputFilePath = outputPath + File.separator + "pom.xml";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+
+        //构建jar包
+        JarGenerator.doGenerator(outputPath);
+
+        //封装脚本
+        String shellOutputFilePath = outputPath + File.separator +"generator";
+        String jarName = String.format("%s-%s-jar-with-dependencies.jar",meta.getName(),meta.getVersion());
+        String jarPath = "target/"+jarName;
+        ScriptGenerator.doGenerate(shellOutputFilePath,jarPath);
     }
 }

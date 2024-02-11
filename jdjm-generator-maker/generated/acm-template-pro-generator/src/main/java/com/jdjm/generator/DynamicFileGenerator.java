@@ -1,7 +1,7 @@
-package ${basePackage}.generator;
+package com.jdjm.generator;
 
 import cn.hutool.core.io.FileUtil;
-import ${basePackage}.model.DataModel;
+import com.jdjm.model.DataModel;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
