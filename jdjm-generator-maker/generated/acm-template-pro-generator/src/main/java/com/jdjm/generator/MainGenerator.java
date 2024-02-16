@@ -25,7 +25,6 @@ public class MainGenerator {
         String outputPath;
 
             inputPath = new File(inputRootPath,"src/com/jdjm/acm/MainTemplate.java.ftl").getAbsolutePath();
-        System.out.println("inputPath:"+inputPath);
             outputPath = new File(outputRootPath,"src/com/jdjm/acm/MainTemplate.java").getAbsolutePath();
                 DynamicFileGenerator.doGenerate(inputPath, outputPath, model);
             inputPath = new File(inputRootPath,"README.md").getAbsolutePath();

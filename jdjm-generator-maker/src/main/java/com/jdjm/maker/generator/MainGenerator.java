@@ -87,6 +87,11 @@ public class MainGenerator {
         outputFilePath = outputPath + File.separator + "pom.xml";
         DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
 
+        //生成README.md项目介绍文件
+        inputFilePath = inputResourcePath + File.separator + "templates/README.md.ftl";
+        outputFilePath = outputPath + File.separator + "README.md";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath,meta);
+
         //构建jar包
         JarGenerator.doGenerator(outputPath);
 
@@ -95,5 +100,19 @@ public class MainGenerator {
         String jarName = String.format("%s-%s-jar-with-dependencies.jar",meta.getName(),meta.getVersion());
         String jarPath = "target/"+jarName;
         ScriptGenerator.doGenerate(shellOutputFilePath,jarPath);
+
+        // 生成精简版的程序(不包含源码)
+        String distOutputPath = outputPath + "-dist";
+        // 拷贝jar包
+        String targetAbsolutePath = distOutputPath + File.separator + "target";
+        FileUtil.mkdir(targetAbsolutePath);
+        String jarAbsolutePath = outputPath + File.separator +jarPath;
+        FileUtil.copy(jarAbsolutePath,targetAbsolutePath,true);
+        //拷贝脚本文件
+        FileUtil.copy(shellOutputFilePath,distOutputPath,true);
+        FileUtil.copy(shellOutputFilePath + ".bat",distOutputPath,true);
+
+        //拷贝源模版文件
+        FileUtil.copy(sourceCopyDestPath,distOutputPath,true);
     }
 }
