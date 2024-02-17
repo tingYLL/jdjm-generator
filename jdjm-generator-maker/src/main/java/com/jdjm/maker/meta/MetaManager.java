@@ -26,6 +26,9 @@ public class MetaManager {
         String metaJson = ResourceUtil.readUtf8Str("meta.json");
         //转成Meta对象
         Meta newMeta = JSONUtil.toBean(metaJson, Meta.class);
+
+        //判断meta.json的输入是否正确、是否缺少输入
+        MetaValidator.doValidAndFill(newMeta);
         return newMeta;
     }
 }
