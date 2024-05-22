@@ -65,7 +65,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>${basePackage}.cli.CommandExecutor</mainClass> <!-- 替换为你的主类的完整类名 -->
+                            <mainClass>${basePackage}.Main</mainClass> <!-- 替换为你的主类的完整类名 -->
                         </manifest>
                     </archive>
                 </configuration>

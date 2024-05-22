@@ -34,11 +34,11 @@ public class FileGenerator {
         DynamicFileGenerator.doGenerate(inputDynamicFilePath, outputDynamicFilePath, model);
     }
 
-    public static void main(String[] args) throws TemplateException, IOException {
-        DataModel dataModel = new DataModel();
-        dataModel.setAuthor("jdjmmml");
-        dataModel.setLoop(true);
-        dataModel.setOutputText("求和结果2：");
-        doGenerate(dataModel);
-    }
+//    public static void main(String[] args) throws TemplateException, IOException {
+//        DataModel dataModel = new DataModel();
+//        dataModel.setAuthor("jdjmmml");
+//        dataModel.setLoop(true);
+//        dataModel.setOutputText("求和结果2：");
+//        doGenerate(dataModel);
+//    }
 }

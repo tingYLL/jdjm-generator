@@ -17,7 +17,7 @@ public class MainGenerator {
      * @throws TemplateException
      * @throws IOException
      */
-    public static void doGenerate(Object model) throws  TemplateException, IOException {
+    public static void doGenerate(DataModel model) throws  TemplateException, IOException {
         String inputRootPath = "${fileConfig.inputRootPath}";
         String outputRootPath = "${fileConfig.outputRootPath}";
 

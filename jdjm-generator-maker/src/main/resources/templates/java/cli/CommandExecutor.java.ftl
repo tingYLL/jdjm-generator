@@ -34,8 +34,5 @@ public class CommandExecutor implements Runnable{
         return commandLine.execute(args);
     }
 
-    public static void main(String[] args) {
-        CommandExecutor commandExecutor = new CommandExecutor();
-        commandExecutor.doExecute(args);
-    }
+
 }

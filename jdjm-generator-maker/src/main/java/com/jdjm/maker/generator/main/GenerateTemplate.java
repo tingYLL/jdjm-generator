@@ -82,15 +82,16 @@ public abstract class GenerateTemplate {
         // 读取resources 目录
 //        ClassPathResource classPathResource = new ClassPathResource("");
 //        String inputResourcePath = classPathResource.getAbsolutePath();
-//        src/main/resources/templates
+
+        //src/main/resources
         String inputResourcePath = projectPath + File.separator + "src/main/resources";
 
         //从元信息中读取 Java包的基础路径
         //com.jdjm
         String outputBasePackage = meta.getBasePackage();
-        //转换成com/jdjm
+        //把com.jdjm转换成com/jdjm
         String outputBasePackagePath = StrUtil.join("/",StrUtil.split(outputBasePackage,"."));
-        //generated/src/main/java/com/jdjm
+        //generated/acm-template-pro-generator/src/main/java/com/jdjm
         String outputBaseJavaPackagePath = outputPath + File.separator +"src/main/java/" + outputBasePackagePath;
 
         //生成数据模型DataModel文件
@@ -130,6 +131,11 @@ public abstract class GenerateTemplate {
         outputFilePath = outputBaseJavaPackagePath + "/generator/StaticFileGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath, meta);
 
+        //生成主类
+        inputFilePath = inputResourcePath + File.separator + "templates/java/Main.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/Main.java";
+        DynamicFileGenerator.doGenerate(inputFilePath,outputFilePath, meta);
+        
         //生成pom.xml
         inputFilePath = inputResourcePath +File.separator + "templates/pom.xml.ftl";
         outputFilePath = outputPath + File.separator + "pom.xml";

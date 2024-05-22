@@ -8,15 +8,19 @@ import lombok.Data;
 public class DataModel {
 
         /**
+        *是否生成 .gitignore 文件
+        */
+        public boolean needGit  = true;
+        /**
         *是否生成循环
         */
-        private boolean loop  = false;
+        public boolean loop  = false;
         /**
         *作者注释
         */
-        private String author  = "yupi";
+        public String author  = "jdjm";
         /**
         *输出信息
         */
-        private String outputText  = "sum = ";
+        public String outputText  = "sum = ";
 }
