@@ -96,6 +96,10 @@ public class MetaValidator {
         }
         for (Meta.FileConfig.FileInfo fileInfo : fileInfoList) {
             String type = fileInfo.getType();
+            //如果是分组类型，就不进行判断
+            if(FileTypeEnum.GROUP.getValue().equals(type)){
+                continue;
+            }
             // inputPath: 必填
             String inputPath = fileInfo.getInputPath();
             if (StrUtil.isBlank(inputPath)) {

@@ -15,13 +15,27 @@
         "inputPath": "src/com/jdjm/acm/MainTemplate.java.ftl",
         "outputPath": "src/com/jdjm/acm/MainTemplate.java",
         "type": "file",
-        "generateType": "dynamic"
+        "generateType": "dynamic",
       },
       {
-        "inputPath": "README.md",
-        "outputPath": "README.md",
-        "type": "file",
-        "generateType": "static"
+        "groupName": "开源" ,
+        "groupKey": "Key",
+        "type": "group",
+        "condition": "needGit",
+        "files": [
+          {
+            "inputPath": "README.md",
+            "outputPath": "README.md",
+            "type": "file",
+            "generateType": "static"
+          },
+          {
+            "inputPath": ".gitignore",
+            "outputPath": ".gitignore",
+            "type": "file",
+            "generateType": "static",
+          }
+        ]
       }
     ]
   },

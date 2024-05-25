@@ -9,6 +9,8 @@ import java.io.IOException;
 /**
  * 完整的生成
  */
+
+
 public class MainGenerator {
     /**
      * 生成
@@ -24,11 +26,22 @@ public class MainGenerator {
         String inputPath;
         String outputPath;
 
-            inputPath = new File(inputRootPath,"src/com/jdjm/acm/MainTemplate.java.ftl").getAbsolutePath();
-            outputPath = new File(outputRootPath,"src/com/jdjm/acm/MainTemplate.java").getAbsolutePath();
-                DynamicFileGenerator.doGenerate(inputPath, outputPath, model);
-            inputPath = new File(inputRootPath,"README.md").getAbsolutePath();
-            outputPath = new File(outputRootPath,"README.md").getAbsolutePath();
-                StaticFileGenerator.copyFilesByHutool(inputPath, outputPath);
+        boolean needGit = model.needGit;
+        boolean loop = model.loop;
+        String author = model.author;
+        String outputText = model.outputText;
+
+        inputPath = new File(inputRootPath,"src/com/jdjm/acm/MainTemplate.java.ftl").getAbsolutePath();
+        outputPath = new File(outputRootPath,"src/com/jdjm/acm/MainTemplate.java").getAbsolutePath();
+        DynamicFileGenerator.doGenerate(inputPath, outputPath, model);
+        //groupKey = Key
+        if(needGit){
+               inputPath = new File(inputRootPath,"README.md").getAbsolutePath();
+               outputPath = new File(outputRootPath,"README.md").getAbsolutePath();
+               StaticFileGenerator.copyFilesByHutool(inputPath, outputPath);
+               inputPath = new File(inputRootPath,".gitignore").getAbsolutePath();
+               outputPath = new File(outputRootPath,".gitignore").getAbsolutePath();
+               StaticFileGenerator.copyFilesByHutool(inputPath, outputPath);
+        }
     }
 }
