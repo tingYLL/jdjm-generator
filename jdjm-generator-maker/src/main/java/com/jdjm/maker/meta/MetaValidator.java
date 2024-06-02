@@ -38,9 +38,9 @@ public class MetaValidator {
             // 为 group，不校验
             String groupKey = modelInfo.getGroupKey();
             if (StrUtil.isNotEmpty(groupKey)) {
-                // 生成中间参数
+                // 生成中间参数 "--author","--outputText"
                 List<Meta.ModelConfig.ModelInfo> subModelInfoList = modelInfo.getModels();
-                String allArgsStr = modelInfo.getModels().stream()
+                String allArgsStr = subModelInfoList.stream()
                         .map(subModelInfo -> String.format("\"--%s\"", subModelInfo.getFieldName()))
                         .collect(Collectors.joining(", "));
                 modelInfo.setAllArgsStr(allArgsStr);

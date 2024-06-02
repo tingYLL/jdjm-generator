@@ -59,6 +59,7 @@
         "groupKey": "mainTemplate",
         "type": "MainTemplate",
         "description": "用于生成核心模板文件MainTemplate",
+        "condition": "loop",
         "models": [
           {
             "fieldName": "author",
