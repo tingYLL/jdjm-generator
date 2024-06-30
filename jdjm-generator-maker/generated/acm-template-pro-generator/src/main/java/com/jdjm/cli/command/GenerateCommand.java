@@ -4,29 +4,54 @@ import cn.hutool.core.bean.BeanUtil;
 import com.jdjm.generator.MainGenerator;
 import com.jdjm.model.DataModel;
 import lombok.Data;
+import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 import java.util.concurrent.Callable;
 
+
 @Command(name = "generate", description = "生成代码", mixinStandardHelpOptions = true)
 @Data
 public class GenerateCommand implements Callable<Integer> {
 
-        @Option(names = {"--needGit"}, arity = "0..1", description = "是否生成 .gitignore 文件", interactive = true, echo = true)
-        private  boolean needGit  = true;
-        @Option(names = {"-l","--loop"}, arity = "0..1", description = "是否生成循环", interactive = true, echo = true)
-        private  boolean loop  = false;
-        @Option(names = {"-a","--author"}, arity = "0..1", description = "作者注释", interactive = true, echo = true)
-        private  String author  = "jdjm";
-        @Option(names = {"-o","--outputText"}, arity = "0..1", description = "输出信息", interactive = true, echo = true)
-        private  String outputText  = "sum = ";
+       @Option(names = {"--needGit"}, arity = "0..1", description = "是否生成 .gitignore 文件", interactive = true, echo = true)
+       private  boolean needGit  = true;
+       @Option(names = {"-l","--loop"}, arity = "0..1", description = "是否生成循环", interactive = true, echo = true)
+       private  boolean loop  = false;
+            /**
+            *核心模板
+            */
+            static DataModel.MainTemplate mainTemplate = new DataModel.MainTemplate();
+
+            @Data
+            @Command(name = "mainTemplate", description = "用于生成核心模板文件MainTemplate")
+            public static class MainTemplateCommand implements Runnable{
+
+       @Option(names = {"-a","--author"}, arity = "0..1", description = "作者注释", interactive = true, echo = true)
+       private  String author  = "jdjm";
+       @Option(names = {"-o","--outputText"}, arity = "0..1", description = "输出信息", interactive = true, echo = true)
+       private  String outputText  = "sum = ";
+
+            @Override
+            public void run(){
+                    mainTemplate.author = author;
+                    mainTemplate.outputText = outputText;
+                }
+            }
 
     public Integer call() throws Exception {
+                  if(loop){
+        System.out.println("请输入核心模板配置:");
+        CommandLine commandLine = new CommandLine(MainTemplateCommand.class);
+        commandLine.execute("--author", "--outputText");
+                  }
         DataModel dataModel = new DataModel();
-        BeanUtil.copyProperties(this, dataModel);
-        System.out.println("配置信息：" + dataModel);
-        MainGenerator.doGenerate(dataModel);
-        return 0;
+        BeanUtil.copyProperties(this,dataModel);
+                dataModel.mainTemplate = mainTemplate;
+    MainGenerator.doGenerate(dataModel);
+    return 0;
     }
+
+
 }

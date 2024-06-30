@@ -52,7 +52,7 @@
         "type": "boolean",
         "description": "是否生成循环",
         "defaultValue": false,
-        "abbr": "l"
+        "abbr": "l",
       },
       {
         "groupName": "核心模板" ,

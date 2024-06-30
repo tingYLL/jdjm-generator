@@ -28,8 +28,8 @@ public class MainGenerator {
 
         boolean needGit = model.needGit;
         boolean loop = model.loop;
-        String author = model.author;
-        String outputText = model.outputText;
+        String author = model.mainTemplate.author;
+        String outputText = model.mainTemplate.outputText;
 
         inputPath = new File(inputRootPath,"src/com/jdjm/acm/MainTemplate.java.ftl").getAbsolutePath();
         outputPath = new File(outputRootPath,"src/com/jdjm/acm/MainTemplate.java").getAbsolutePath();
