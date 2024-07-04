@@ -1,7 +1,7 @@
 package com.jdjm.maker.generator.file;
 
 import cn.hutool.core.io.FileUtil;
-import com.jdjm.maker.model.DataModel;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

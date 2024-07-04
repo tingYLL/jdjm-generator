@@ -1,6 +1,6 @@
 package com.jdjm.maker.generator.file;
 
-import com.jdjm.maker.model.DataModel;
+
 import freemarker.template.TemplateException;
 
 import java.io.File;

@@ -2,6 +2,7 @@
 .idea
 jdjm-generator.iml
 acm-template.iml
+.temp
 
 ### Java template
 # Compiled class file
